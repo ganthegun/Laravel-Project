@@ -62,6 +62,36 @@ class ExpertController extends Controller
         return view('expert.expertList', compact('expert'));
     }
 
+    public function search(Request $request)
+    {
+        // Validate the search input
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+        ]);
+
+        // Get the search input
+        $search = $request->input('search');
+
+        // Query experts based on the search input
+        $query = Expert::query();
+
+        // If a search term is provided, filter experts by name
+        if ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        // Exclude the current user from the list of experts
+        $query->where('user_id', '!=', Auth::id());
+
+        // Get the experts based on the query
+        $expert = $query->get();
+
+        // Pass the experts to the view
+        return view('expert.expertList', compact('expert'));
+    }
+
+
+
     public function myExpertList() // list of my expert
     {
         $expert = Expert::where('user_id', Auth::id())->get();

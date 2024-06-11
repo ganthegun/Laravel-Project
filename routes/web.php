@@ -88,6 +88,8 @@ Route::put('/expert/{id}', [ExpertController::class, 'update'])->name('expert.de
 Route::get('/expert/{id}/confirmRemove', [ExpertController::class, 'confirmRemove'])->name('expert.confirmRemove');// Route for confirm remove
 Route::post('/expert/{id}/remove', [ExpertController::class, 'destroy'])->name('expert.removeExpert');             // Route for remove expert
 
+Route::get('/search', [ExpertController::class, 'search'])->name('searchExpert.search');
+
 Route::get('/expert/publication/new/{id}', [ExpertController::class, 'createPublication'])->name('expert.publication.addPublication');
 Route::post('/expert/publication/create', [ExpertController::class, 'store'])->name('expert.publication.createPublication');
 Route::get('/expert/publication/{id}', [ExpertController::class, 'viewPublication'])->name('expert.publication.viewPublication');// Route for publication detail

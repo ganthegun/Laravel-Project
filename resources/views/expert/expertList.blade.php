@@ -11,7 +11,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('expert.myExpertList') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('My Expert') }}</a>
+                    
+                    <form action="{{ route('searchExpert.search') }}" method="GET" class="mb-3">
+                        <div class="flex">
+                            <input type="text" name="search" class="form-input rounded-l-md border-gray-300 block w-full text-white" placeholder="Search by name...">
+                            <button type="submit" class="btn btn-custom-search rounded-r-md text-black bg-white px-8 ">Search</button>
+                            <a href="{{ route('expert.expertList') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Clear') }}</a>
+                            <a href="{{ route('expert.myExpertList') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('My Expert') }}</a>
+                        </div>
+                    </form>
+                    
+                    
+
+                    
                     <table id="expertTable" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
@@ -48,4 +60,4 @@
             </div>
         </div>
     </div>
- @endsection
+@endsection
