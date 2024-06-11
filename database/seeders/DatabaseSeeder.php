@@ -104,31 +104,31 @@ class DatabaseSeeder extends Seeder
         //     'staff_id' => 1
         // ])->crmp()->create();
 
-        // User::factory()->create([
-        //     'name' => 'Platinum 1',
-        //     'email' => 'platinum1@gmail.com',
-        //     'password' => bcrypt('asdfasdf'),
-        //     'photo' => '',
-        //     'ic' => '050505050505',
-        //     'gender' => 'male',
-        //     'religion' => 'other',
-        //     'race' => 'other',
-        //     'address' => 'Universiti Malaysia Pahang',
-        //     'city' => 'Pekan',
-        //     'state' => 'Pahang',
-        //     'postcode' => '26600',
-        //     'phoneNo' => '0144444444',
-        //     'role' => 'platinum',
-        //     'age' => 19,
-        //     'dob' => '2005-05-05'
-        // ])->platinum()->create([
-        //     'educationLevel' => 'Bachelor Degree',
-        //     'educationField' => 'Computer Science',
-        //     'educationInstitute' => 'Universiti Malaysia Pahang',
-        //     'package' => 'professorship',
-        //     'staff_id' => 1
-        // ])->supervision()->create([
-        //     'crmp_id' => 1
-        // ]);
+        User::factory()->create([
+            'name' => 'Platinum 1',
+            'email' => 'platinum1@gmail.com',
+            'password' => bcrypt('asdfasdf'),
+            'photo' => '',
+            'ic' => '050505050505',
+            'gender' => 'male',
+            'religion' => 'other',
+            'race' => 'other',
+            'address' => 'Universiti Malaysia Pahang',
+            'city' => 'Pekan',
+            'state' => 'Pahang',
+            'postcode' => '26600',
+            'phoneNo' => '0144444444',
+            'role' => 'platinum',
+            'age' => 19,
+            'dob' => '2005-05-05'
+        ])->platinum()->create([
+            'educationLevel' => 'Bachelor Degree',
+            'educationField' => 'Computer Science',
+            'educationInstitute' => 'Universiti Malaysia Pahang',
+            'package' => 'professorship',
+            'staff_id' => 1
+        ])->supervision()->create([
+            'crmp_id' => 1
+        ]);
     }
 }

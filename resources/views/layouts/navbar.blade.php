@@ -43,6 +43,9 @@
                                 <a href="{{ route('platinum.list') }}" class="nav-link">View Platinum</a>
                             </li>
                         @endif
+                        <li class="nav-item dropdown">
+                            <a href="{{ route('expert.expertList') }}"  class="nav-link">Data Expert</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

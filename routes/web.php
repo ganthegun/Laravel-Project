@@ -7,6 +7,8 @@ use App\Http\Controllers\PlatinumController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\ExpertController;
+
 
 // log in and sign up routes
 // show login form
@@ -70,3 +72,26 @@ Route::get('/list/platinum', [PlatinumController::class, 'list'])->name('platinu
 
 // generate report
 Route::get('/report', [StaffController::class, 'report'])->name('staff.report')->middleware('auth');
+
+//Expert Module Routes
+Route::get('/newExpert', function () {
+    return view('expert.newExpert');
+})->middleware(['auth', 'verified'])->name('expert.newExpert');
+
+// Route::get('/expert/newExpert', [ExpertController::class, 'newExpert'])->name('expert.newExpert'); // Route to show the form
+Route::post('/expert', [ExpertController::class, 'createExpert'])->name('expert.createExpert');                    // Route to handle the form submission
+Route::get('/myExpert', [ExpertController::class, 'myExpertList'])->name('expert.myExpertList');                   // Route to list my experts
+Route::get('/expert/{id}', [ExpertController::class, 'detailExpert'])->name('expert.detailExpert');                // Route for expert detail
+Route::get('/expert', [ExpertController::class, 'expertList'])->name('expert.expertList');                         // Route for expert list
+Route::get('/expert/{id}/update', [ExpertController::class, 'updateExpert'])->name('expert.updateExpert');         // Route for update expert
+Route::put('/expert/{id}', [ExpertController::class, 'update'])->name('expert.detailExpert');                      // Route for save update
+Route::get('/expert/{id}/confirmRemove', [ExpertController::class, 'confirmRemove'])->name('expert.confirmRemove');// Route for confirm remove
+Route::post('/expert/{id}/remove', [ExpertController::class, 'destroy'])->name('expert.removeExpert');             // Route for remove expert
+
+Route::get('/expert/publication/new/{id}', [ExpertController::class, 'createPublication'])->name('expert.publication.addPublication');
+Route::post('/expert/publication/create', [ExpertController::class, 'store'])->name('expert.publication.createPublication');
+Route::get('/expert/publication/{id}', [ExpertController::class, 'viewPublication'])->name('expert.publication.viewPublication');// Route for publication detail
+Route::get('/expert/publication/{id}/update', [ExpertController::class, 'editPublication'])->name('expert.publication.editPublication');// Route for publication edit
+Route::put('/expert/publication/{id}', [ExpertController::class, 'updatePublication'])->name('expert.publication.viewPublication');// Route for publication detail
+Route::get('/expert/publication/{id}/confirmRemove', [ExpertController::class, 'confirmDelete'])->name('expert.publication.confirmDelete');// Route for confirm remove
+Route::post('/expert/publication/{id}/remove', [ExpertController::class, 'delete'])->name('expert.publication.deletePublication');
