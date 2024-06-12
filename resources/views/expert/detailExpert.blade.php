@@ -1,16 +1,19 @@
 @extends('layouts.navbar')
 
 @section('contents')
-    <slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Expert Detail') }}
-        </h2>
-    </slot>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex justify-center items-center h-screen">
+        <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100">
+            <div class="text-center mb-6">
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ __('Expert Detail') }}</h2>
+                <br>
+            </div>
+        </div>
+    </div>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex justify-center items-center h-screen">
+            <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100">
+                <div class="text-center mb-6">
                     @if(isset($expert))
                         <p><strong>Name:</strong> {{ $expert->name }}</p>
                         <p><strong>Domain:</strong> 
@@ -40,22 +43,28 @@
                                 {{ $expert->origin }} <!-- If none of the predefined values match -->
                             @endif
                         </p>
-                        @if(isset($expert) && auth()->id() === $expert->user_id)
-                            <br>
-                            <a href="{{ route('expert.updateExpert', ['id' => $expert->expert_id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Update') }}</a>
-                            <br>
-                            <br>
-                            <a href="{{ route('expert.publication.addPublication', ['id' => $expert->expert_id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Add Publication') }}</a>
-                            <br>
-                        @endif
-                        <br>
-                        @if(auth()->id() === $expert->user_id)
-                            <a href="{{ route('expert.myExpertList') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Back to List') }}</a>
-                        @else
-                            <a href="{{ route('expert.expertList') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Back to List') }}</a>
-                        @endif
+                        <div class="flex justify-center items-center">
+                            @if(isset($expert) && auth()->id() === $expert->user_id)
+                                <a href="{{ route('expert.updateExpert', ['id' => $expert->expert_id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Update') }}</a>
+                            @endif
+                            
+                            @if(auth()->id() === $expert->user_id)
+                                <a href="{{ route('expert.myExpertList') }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Back to List') }}</a>
+                            @else
+                                <a href="{{ route('expert.expertList') }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Back to List') }}</a>
+                            @endif
+                        </div>
 
-                        <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mt-6 text-center">{{ $expert->name }}'s Publications</h3>
+                        <br>
+                        <br>
+                        <div class="flex justify-between items-center">
+                            <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mt-6"><strong>{{ $expert->name }}'s Publications</strong></h3>
+                            @if(isset($expert) && auth()->id() === $expert->user_id)
+                                <a href="{{ route('expert.publication.addPublication', ['id' => $expert->expert_id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Add Publication') }}</a>
+                            @endif
+                        </div>
+                        <br>
+
                         @if($expert->publications && $expert->publications->count() > 0)
                             <div class="mt-4 overflow-x-auto">
                                 <table class="min-w-full bg-gray dark:bg-gray-800 mx-auto">
@@ -65,8 +74,6 @@
                                             <th class="text-center py-2 px-4 border-b border-gray-200 dark:border-gray-700">Year</th>
                                             <th class="text-center py-2 px-4 border-b border-gray-200 dark:border-gray-700">Type</th>
                                             <th class="text-center py-2 px-4 border-b border-gray-200 dark:border-gray-700">File</th>
-                                            <!-- <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700">Category</th>
-                                            <th class="py-2 px-4 border-b border-gray-200 dark:border-gray-700">Owner</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -77,9 +84,9 @@
                                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-center">{{ $publication->year }}</td>
                                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-center">{{ $publication->type }}</td>
                                                     <td class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-center">
-                                                        <a href="{{ route('expert.publication.viewPublication', ['id' => $publication->id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">View</a>
+                                                        <a href="{{ route('expert.publication.viewPublication', ['id' => $publication->id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">View</a>
                                                         @if(isset($expert) && auth()->id() === $expert->user_id)
-                                                            <a href="{{ route('expert.publication.confirmDelete', ['id' => $publication->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Remove') }}</a>
+                                                            <a href="{{ route('expert.publication.confirmDelete', ['id' => $publication->id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Remove') }}</a>
                                                         @endif
                                                     </td>
                                                 </tr>
@@ -89,7 +96,7 @@
                                 </table>
                             </div>
                         @else
-                            <p>{{ __('No publications found.') }}</p>
+                            <p class="py-2 px-4 border-b border-gray-200 dark:border-gray-700 text-center">{{ __('No publications found.') }}</p>
                         @endif
                     @else
                         <p>{{ __('Expert not found.') }}</p>

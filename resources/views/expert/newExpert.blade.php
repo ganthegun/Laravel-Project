@@ -32,10 +32,10 @@
                             <label for="domain" class="block font-medium text-sm text-white">{{ __('Domain') }}</label>
                             <select id="domain" name="domain" class="block mt-1 w-full text-white" required>
                                 <option value="">Select a domain</option>
-                                <option value="SE">Software Engineering</option>
-                                <option value="DS">Data Science</option>
-                                <option value="AI">Artificial Intelligence</option>
-                                <option value="WD">Web Development</option>
+                                <option value="Software Engineering">Software Engineering</option>
+                                <option value="Data Science">Data Science</option>
+                                <option value="Artificial Intelligence">Artificial Intelligence</option>
+                                <option value="Web Development">Web Development</option>
                             </select>
                         </div>
                         <div class="mb-4">

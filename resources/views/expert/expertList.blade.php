@@ -1,29 +1,39 @@
 @extends('layouts.navbar')
 
 @section('contents')
-    <slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Expert List') }}
-        </h2>
-    </slot>
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex justify-center items-center h-screen">
+    <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100">
+        <div class="text-center mb-6">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ __('Expert List') }}</h2>
+            <br>
+            <form action="{{ route('searchExpert.search') }}" method="GET" class="mb-3">
+                <div class="flex items-center">
+                    <input type="text" name="search" class="form-input border-l-0 rounded-l-none rounded-r-md border-gray-300 block w-full text-white" placeholder="Search...">
+                    <button type="submit" class="btn btn-custom-search rounded-l-none rounded-r-md text-black bg-white px-8">Search</button>
+                    <a href="{{ route('expert.expertList') }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Clear') }}</a>
+                    <br>
+                    <br>
+                    <label class="mr-2 text-white">Search by:</label>
+                    <label class="inline-flex items-center mr-4">
+                        <input type="radio" name="search_by" value="name" class="form-radio text-white">
+                        <span class="ml-2">Name</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="search_by" value="domain" class="form-radio text-white">
+                        <span class="ml-2">Domain</span>
+                    </label>
+                </div>
+            </form>
 
+            
+            <br>
+        </div>
+    </div>
+</div>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    
-                    <form action="{{ route('searchExpert.search') }}" method="GET" class="mb-3">
-                        <div class="flex">
-                            <input type="text" name="search" class="form-input rounded-l-md border-gray-300 block w-full text-white" placeholder="Search by name...">
-                            <button type="submit" class="btn btn-custom-search rounded-r-md text-black bg-white px-8 ">Search</button>
-                            <a href="{{ route('expert.expertList') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Clear') }}</a>
-                            <a href="{{ route('expert.myExpertList') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('My Expert') }}</a>
-                        </div>
-                    </form>
-                    
-                    
-
-                    
                     <table id="expertTable" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
@@ -51,7 +61,7 @@
                                         {{ $expert->domain }}
                                     @endif
                                 </td>
-                                <td class="text-center"><a href="{{ route('expert.detailExpert', ['id' => $expert->expert_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">View</a></td>
+                                <td class="text-center"><a href="{{ route('expert.detailExpert', ['id' => $expert->expert_id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">View</a></td>
                             </tr>
                             @endforeach
                         </tbody>

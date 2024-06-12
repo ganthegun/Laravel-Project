@@ -38,14 +38,27 @@
                             <li class="nav-item dropdown">
                                 <a href="{{ route('staff.list') }}" class="nav-link">View User</a>
                             </li>
-                        @else
                             <li class="nav-item dropdown">
-                                <a href="{{ route('platinum.list') }}" class="nav-link">View Platinum</a>
+                                <a href="{{ route('expert.expertList') }}"  class="nav-link">Data Expert</a>
                             </li>
-                        @endif
+                        @else
                         <li class="nav-item dropdown">
-                            <a href="{{ route('expert.expertList') }}"  class="nav-link">Data Expert</a>
+                            <a href="{{ route('platinum.list') }}" class="nav-link">View Platinum</a>
                         </li>
+                        <!-- Add more user links here -->
+                        <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Data Expert
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="{{ route('expert.expertList') }}">All Expert</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('expert.myExpertList') }}">My Expert</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('expert.newExpert') }}">New Expert</a></li>
+                                </ul>
+                            </li>
+                        </li>
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->

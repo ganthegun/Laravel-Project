@@ -2,28 +2,23 @@
 
 @section('contents') 
 
-    <slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('My Expert List') }}
-        </h2>
-    </slot>
-
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <p>Total Experts Inserted: {{ $totalExperts }}</p>
-                    <p>Total Publications: {{ $totalPublications }}</p>
-                </div>
-            </div>
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex justify-center items-center h-screen">
+    <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900 dark:text-gray-100">
+        <div class="text-center mb-6">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">{{ __('My Expert List') }}</h2>
+            <br>
+            <p>Total Experts Inserted: {{ $totalExperts }}</p>
+            <p>Total Publications: {{ $totalPublications }}</p>
+            <br>
         </div>
     </div>
+</div>
+
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-gray dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <a href="{{ route('expert.newExpert') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Add New') }}</a>
                     <table id="expertTable" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
@@ -52,8 +47,8 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('expert.detailExpert', ['id' => $expert->expert_id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">View</a>
-                                    <a href="{{ route('expert.confirmRemove', ['id' => $expert->expert_id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Remove') }}</a>
+                                    <a href="{{ route('expert.detailExpert', ['id' => $expert->expert_id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">View</a>
+                                    <a href="{{ route('expert.confirmRemove', ['id' => $expert->expert_id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Remove') }}</a>
                                 </td>
                             </tr>
                             @endforeach

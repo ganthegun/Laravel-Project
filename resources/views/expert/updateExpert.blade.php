@@ -25,10 +25,10 @@
                             <label for="domain" class="block font-medium text-sm text-white">{{ __('Domain') }}</label>
                             <select id="domain" name="domain" class="block mt-1 w-full text-white" required>
                                 <option value="" disabled>Select Domain</option>
-                                <option value="SE" {{ $expert->domain === 'SE' ? 'selected' : '' }}>Software Engineering</option>
-                                <option value="DS" {{ $expert->domain === 'DS' ? 'selected' : '' }}>Data Science</option>
-                                <option value="AI" {{ $expert->domain === 'AI' ? 'selected' : '' }}>Artificial Intelligence</option>
-                                <option value="WD" {{ $expert->domain === 'WD' ? 'selected' : '' }}>Web Development</option>
+                                <option value="Software Engineering" {{ $expert->domain === 'Software Engineering' ? 'selected' : '' }}>Software Engineering</option>
+                                <option value="Data Science" {{ $expert->domain === 'Data Science' ? 'selected' : '' }}>Data Science</option>
+                                <option value="Artificial Intelligence" {{ $expert->domain === 'Artificial Intelligence' ? 'selected' : '' }}>Artificial Intelligence</option>
+                                <option value="Web Development" {{ $expert->domain === 'Web Development' ? 'selected' : '' }}>Web Development</option>
                             </select>
 
                         </div>

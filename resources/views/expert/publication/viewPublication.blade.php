@@ -27,11 +27,11 @@
                         
                         @if($publication->owner_type === 'Expert' && auth()->id() == $expert->user_id)
                             <br>
-                                <a href="{{ route('expert.publication.editPublication', ['id' => $publication->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('Update') }}</a>
+                                <a href="{{ route('expert.publication.editPublication', ['id' => $publication->id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Update') }}</a>
                             <br>
                         @endif
                         <br>
-                        <a href="{{ route('expert.detailExpert', ['id' => $publication->owner_id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <a href="{{ route('expert.detailExpert', ['id' => $publication->owner_id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">
                             {{ __('Back to Expert Detail') }}
                         </a>
                         @else

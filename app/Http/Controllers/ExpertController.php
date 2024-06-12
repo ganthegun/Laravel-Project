@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Log;
+use App\Models\User;
+
 
 class ExpertController extends Controller
 {
@@ -56,40 +58,68 @@ class ExpertController extends Controller
         return view('expert.detailExpert', compact('expert'));
     }
 
-    public function expertList() // list of expert
+    public function expertList()
     {
-        $expert = Expert::where('user_id', '!=', Auth::id())->get();
+        $user = auth()->user();
+
+        // Retrieve the user's role from the database
+        $role = User::where('id', $user->id)->value('role');
+
+        if ($role === 'platinum') {
+            // For platinum role, fetch experts excluding the current user
+            $expert = Expert::where('user_id', '!=', $user->id)->get();
+        } elseif ($role === 'mentor') {
+            // For mentor role, fetch all experts 
+            $expert = Expert::all();
+        } else {
+            // Handle other roles as necessary
+            abort(403, 'Unauthorized action.');
+        }
+
         return view('expert.expertList', compact('expert'));
     }
 
     public function search(Request $request)
     {
+        $user = auth()->user();
+
+        // Retrieve the user's role from the database
+        $role = User::where('id', $user->id)->value('role');
+
         // Validate the search input
         $request->validate([
             'search' => 'nullable|string|max:255',
+            'search_by' => 'required|in:name,domain', // Validate the search_by parameter
         ]);
 
-        // Get the search input
+        // Get the search input and search_by parameter
         $search = $request->input('search');
+        $searchBy = $request->input('search_by');
 
         // Query experts based on the search input
         $query = Expert::query();
 
-        // If a search term is provided, filter experts by name
+        // If a search term is provided, filter experts by name or domain based on the selected option
         if ($search) {
-            $query->where('name', 'like', '%' . $search . '%');
+            if ($searchBy === 'name') {
+                $query->where('name', 'like', '%' . $search . '%');
+            } elseif ($searchBy === 'domain') {
+                $query->where('domain', 'like', '%' . $search . '%');
+            }
         }
 
         // Exclude the current user from the list of experts
-        $query->where('user_id', '!=', Auth::id());
-
+        if ($role === 'platinum') {
+            // For platinum role, fetch experts excluding the current user
+            $query->where('user_id', '!=', Auth::id());
+        }
+        
         // Get the experts based on the query
         $expert = $query->get();
 
         // Pass the experts to the view
         return view('expert.expertList', compact('expert'));
     }
-
 
 
     public function myExpertList() // list of my expert
