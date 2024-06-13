@@ -59,7 +59,7 @@
                         <br>
                         <div class="flex justify-between items-center">
                             <h3 class="font-semibold text-lg text-gray-800 dark:text-gray-200 mt-6"><strong>{{ $expert->name }}'s Publications</strong></h3>
-                            @if(isset($expert) && auth()->id() === $expert->user_id)
+                            @if(isset($expert) && auth()->id() === $expert->user_id && auth()->user()->role === 'platinum')
                                 <a href="{{ route('expert.publication.addPublication', ['id' => $expert->expert_id]) }}" class="btn btn-custom-search rounded-r-md text-black bg-white px-8">{{ __('Add Publication') }}</a>
                             @endif
                         </div>

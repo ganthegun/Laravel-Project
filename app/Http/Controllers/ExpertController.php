@@ -121,7 +121,6 @@ class ExpertController extends Controller
         return view('expert.expertList', compact('expert'));
     }
 
-
     public function myExpertList() // list of my expert
     {
         $expert = Expert::where('user_id', Auth::id())->get();
