@@ -189,7 +189,6 @@ class ExpertController extends Controller
         return view('expert.publication.addPublication', compact('expert'));
     }
 
-
     public function store(Request $request)
     {
         // Log the request data for debugging
