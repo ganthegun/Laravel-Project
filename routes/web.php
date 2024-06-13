@@ -78,22 +78,20 @@ Route::get('/newExpert', function () {
     return view('expert.newExpert');
 })->middleware(['auth', 'verified'])->name('expert.newExpert');
 
-// Route::get('/expert/newExpert', [ExpertController::class, 'newExpert'])->name('expert.newExpert'); // Route to show the form
-Route::post('/expert', [ExpertController::class, 'createExpert'])->name('expert.createExpert');                    // Route to handle the form submission
-Route::get('/myExpert', [ExpertController::class, 'myExpertList'])->name('expert.myExpertList');                   // Route to list my experts
-Route::get('/expert/{id}', [ExpertController::class, 'detailExpert'])->name('expert.detailExpert');                // Route for expert detail
-Route::get('/expert', [ExpertController::class, 'expertList'])->name('expert.expertList');                         // Route for expert list
-Route::get('/expert/{id}/update', [ExpertController::class, 'updateExpert'])->name('expert.updateExpert');         // Route for update expert
-Route::put('/expert/{id}', [ExpertController::class, 'update'])->name('expert.detailExpert');                      // Route for save update
-Route::get('/expert/{id}/confirmRemove', [ExpertController::class, 'confirmRemove'])->name('expert.confirmRemove');// Route for confirm remove
-Route::post('/expert/{id}/remove', [ExpertController::class, 'destroy'])->name('expert.removeExpert');             // Route for remove expert
+Route::post('/expert', [ExpertController::class, 'createExpert'])->name('expert.createExpert')->middleware('auth');                    // Route to handle the form submission
+Route::get('/myExpert', [ExpertController::class, 'myExpertList'])->name('expert.myExpertList')->middleware('auth');                   // Route to list my experts
+Route::get('/expert/{id}', [ExpertController::class, 'detailExpert'])->name('expert.detailExpert')->middleware('auth');                // Route for expert detail
+Route::get('/expert', [ExpertController::class, 'expertList'])->name('expert.expertList')->middleware('auth');                         // Route for expert list
+Route::get('/expert/{id}/update', [ExpertController::class, 'updateExpert'])->name('expert.updateExpert')->middleware('auth');         // Route for update expert
+Route::put('/expert/{id}', [ExpertController::class, 'update'])->name('expert.detailExpert')->middleware('auth');                      // Route for save update
+Route::get('/expert/{id}/confirmRemove', [ExpertController::class, 'confirmRemove'])->name('expert.confirmRemove')->middleware('auth');// Route for confirm remove
+Route::post('/expert/{id}/remove', [ExpertController::class, 'destroy'])->name('expert.removeExpert')->middleware('auth');             // Route for remove expert
+Route::get('/search', [ExpertController::class, 'search'])->name('searchExpert.search')->middleware('auth');                           // Route for search expert
 
-Route::get('/search', [ExpertController::class, 'search'])->name('searchExpert.search');
-
-Route::get('/expert/publication/new/{id}', [ExpertController::class, 'createPublication'])->name('expert.publication.addPublication');
-Route::post('/expert/publication/create', [ExpertController::class, 'store'])->name('expert.publication.createPublication');
-Route::get('/expert/publication/{id}', [ExpertController::class, 'viewPublication'])->name('expert.publication.viewPublication');// Route for publication detail
-Route::get('/expert/publication/{id}/update', [ExpertController::class, 'editPublication'])->name('expert.publication.editPublication');// Route for publication edit
-Route::put('/expert/publication/{id}', [ExpertController::class, 'updatePublication'])->name('expert.publication.viewPublication');// Route for publication detail
-Route::get('/expert/publication/{id}/confirmRemove', [ExpertController::class, 'confirmDelete'])->name('expert.publication.confirmDelete');// Route for confirm remove
-Route::post('/expert/publication/{id}/remove', [ExpertController::class, 'delete'])->name('expert.publication.deletePublication');
+Route::get('/expert/publication/new/{id}', [ExpertController::class, 'createPublication'])->name('expert.publication.addPublication')->middleware('auth');      // Route for create publication
+Route::post('/expert/publication/create', [ExpertController::class, 'store'])->name('expert.publication.createPublication')->middleware('auth');                // Route for store publication
+Route::get('/expert/publication/{id}', [ExpertController::class, 'viewPublication'])->name('expert.publication.viewPublication')->middleware('auth');           // Route for publication detail
+Route::get('/expert/publication/{id}/update', [ExpertController::class, 'editPublication'])->name('expert.publication.editPublication')->middleware('auth');    // Route for publication edit
+Route::put('/expert/publication/{id}', [ExpertController::class, 'updatePublication'])->name('expert.publication.viewPublication')->middleware('auth');         // Route for publication detail
+Route::get('/expert/publication/{id}/confirmRemove', [ExpertController::class, 'confirmDelete'])->name('expert.publication.confirmDelete')->middleware('auth'); // Route for confirm remove
+Route::post('/expert/publication/{id}/remove', [ExpertController::class, 'delete'])->name('expert.publication.deletePublication')->middleware('auth');          // Route for delete publication
